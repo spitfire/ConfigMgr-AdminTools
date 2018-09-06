@@ -1,0 +1,16 @@
+<ActionDescription Class="Group" DisplayName="RC Tools" MnemonicDisplayName="RC Tools" Description="Created by Octavian Cordos" SqmDataPoint="53" SelectionMode="Both">
+	<ShowOn>
+		<string>ContextMenu</string>
+	</ShowOn>
+	<ActionGroups>
+	<ActionDescription Class ="Executable" DisplayName="Remove old Revisions" MnemonicDisplayName="Remove old Revisions" Description="Not a required value">
+		<ShowOn>
+			<string>ContextMenu</string>
+		</ShowOn> 
+	<Executable>
+        <FilePath>"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</FilePath>
+        <Parameters>-file C:\ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1 ##SUB:LocalizedDisplayName##</Parameters>
+      </Executable>
+	</ActionDescription>	
+	</ActionGroups>
+</ActionDescription>
