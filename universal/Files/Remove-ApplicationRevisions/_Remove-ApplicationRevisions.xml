@@ -9,7 +9,7 @@
 		</ShowOn> 
 	<Executable>
         <FilePath>"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</FilePath>
-        <Parameters>-file C:\ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1 ##SUB:LocalizedDisplayName##</Parameters>
+        <Parameters>-file C:\ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1 "##SUB:LocalizedDisplayName##"</Parameters>
       </Executable>
 	</ActionDescription>	
 	</ActionGroups>

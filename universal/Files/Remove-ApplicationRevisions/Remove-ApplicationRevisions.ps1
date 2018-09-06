@@ -11,7 +11,7 @@ Catch {
 }
 #  Get the CMSITE SiteCode and change connection context
 Try {
-    $SiteCode = (Get-PSDrive -PSProvider CMSITE).Name
+    $SiteCode = (Get-PSDrive -PSProvider CMSITE).Name |Select-Object -First 1
 }
 Catch {
     Write-host -Message 'Get PS drive - Failed!'
