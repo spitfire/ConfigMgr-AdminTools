@@ -61,15 +61,15 @@ Try {
 	##* VARIABLE DECLARATION
 	##*===============================================
 	## Variables: Application
-	[string]$appVendor = ''
-	[string]$appName = ''
-	[string]$appVersion = ''
+	[string]$appVendor = 'International Paper'
+	[string]$appName = 'Admin Tools'
+	[string]$appVersion = '1.0.0'
 	[string]$appArch = ''
 	[string]$appLang = 'en-us'
 	[string]$appRevision = '01'
 	[string]$baseScriptVersion = '1.2.0'
 	[string]$appScriptVersion = '1.0.0'
-	[string]$appScriptDate = '2018-08-16'
+	[string]$appScriptDate = '2018-09-06'
 	[string]$appScriptAuthor = 'Mieszko Ślusarczyk'
 	[bool]$showPostinstallMessage = $false
 	##*===============================================
