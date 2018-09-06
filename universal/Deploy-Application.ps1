@@ -166,8 +166,8 @@ Try {
 			$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
 			
 			#https://sccm-zone.com/sccm-right-click-clean-old-application-revisions-309f7bb9a8db
-			If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86–459c-b89e-d3a49c05d367\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86–459c-b89e-d3a49c05d367\"}
-			Copy-File "$dirFiles\Remove-ApplicationRevisions\_Remove-ApplicationRevisions.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86–459c-b89e-d3a49c05d367\"
+			If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"}
+			Copy-File "$dirFiles\Remove-ApplicationRevisions\_Remove-ApplicationRevisions.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"
 			Copy-File "$dirFiles\Remove-ApplicationRevisions\Remove-ApplicationRevisions.ps1" "$env:ProgramData\ConfigMgr\"
 			Unblock-File "$env:ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1"
 			
