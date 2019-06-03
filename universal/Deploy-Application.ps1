@@ -108,6 +108,25 @@ Try {
 
 	#endregion
 	##* Do not modify section above
+	Function Install-Remove_ApplicationRevisions
+	{
+		#https://sccm-zone.com/sccm-right-click-clean-old-application-revisions-309f7bb9a8db
+		If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"}
+		Copy-File "$dirFiles\Remove-ApplicationRevisions\_Remove-ApplicationRevisions.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"
+		Copy-File "$dirFiles\Remove-ApplicationRevisions\Remove-ApplicationRevisions.ps1" "$env:ProgramData\ConfigMgr\"
+		Unblock-File "$env:ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1"
+	}
+
+	Function Install-Extensions
+	{
+		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
+		If ($Env:SMS_ADMIN_UI_PATH) #ConfigMgr admin console installed
+		{
+			$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
+			Install-Remove_ApplicationRevisions
+		}
+		
+	}
 
 	#Set DeployMode to 'NonInteractive' if running a task sequence
 	If ($runningTaskSequence){ $DeployMode = 'NonInteractive'}
@@ -160,19 +179,7 @@ Try {
 		}
 		
 		## <Perform Installation tasks here>
-		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
-		If ($Env:SMS_ADMIN_UI_PATH) #ConfigMgr admin console installed
-		{
-			$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
-			
-			#https://sccm-zone.com/sccm-right-click-clean-old-application-revisions-309f7bb9a8db
-			If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"}
-			Copy-File "$dirFiles\Remove-ApplicationRevisions\_Remove-ApplicationRevisions.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\968164ab-af86-459c-b89e-d3a49c05d367\"
-			Copy-File "$dirFiles\Remove-ApplicationRevisions\Remove-ApplicationRevisions.ps1" "$env:ProgramData\ConfigMgr\"
-			Unblock-File "$env:ProgramData\ConfigMgr\Remove-ApplicationRevisions.ps1"
-			
-
-		}
+		Install-Extensions
 		
 		
 		##*===============================================
