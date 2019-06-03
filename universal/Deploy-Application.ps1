@@ -113,7 +113,7 @@ Try {
 	If ($runningTaskSequence){ $DeployMode = 'NonInteractive'}
 
 	## Specify list of (comma separated) names of the processes that should be closed dutring installation, i.e. "iexplore,java"
-	$processes = "" 
+	$processes = "Microsoft.ConfigurationManagement"
 	##*===============================================
 	##* END VARIABLE DECLARATION
 	##*===============================================
