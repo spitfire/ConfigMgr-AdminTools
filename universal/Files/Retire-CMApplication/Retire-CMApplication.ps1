@@ -102,3 +102,5 @@ foreach ($RetiringAppName in $RetiringApps) {
         Write-Host "$RetiringAppName was not found. No actions performed."
     }
 }
+Write-host "Finished!"
+Read-Host -Prompt "Press ENTER to exit"
