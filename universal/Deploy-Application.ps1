@@ -63,7 +63,7 @@ Try {
 	## Variables: Application
 	[string]$appVendor = 'International Paper'
 	[string]$appName = 'Admin Tools'
-	[string]$appVersion = '1.1.0'
+	[string]$appVersion = '1.2.0'
 	[string]$appArch = ''
 	[string]$appLang = 'en-us'
 	[string]$appRevision = '01'
@@ -171,15 +171,32 @@ Try {
 		If ("$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1") { Remove-File -Path "$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1" }		
 	}
 
+	Function Install-Validate_ContentOnDPs
+	{
+		#https://gregramsey.net/2013/04/19/how-to-initiate-the-validate-action-on-all-dps-for-a-package-in-configmgr-2012/
+		If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\"}
+		Copy-File "$dirFiles\Validate-ContentOnDPs\_Validate-ContentOnDPs.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\"
+		Copy-File "$dirFiles\Validate-ContentOnDPs\Validate-ContentOnDPs.ps1" "$env:ProgramData\ConfigMgr\"
+		Unblock-File "$env:ProgramData\ConfigMgr\Validate-ContentOnDPs.ps1"
+	}
+
+	Function UnInstall-Validate_ContentOnDPs
+	{
+		#https://gregramsey.net/2013/04/19/how-to-initiate-the-validate-action-on-all-dps-for-a-package-in-configmgr-2012/
+		If ("$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\_Validate-ContentOnDPs.xml"){Remove-File -Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\_Validate-ContentOnDPs.xml"}
+		If ("$env:ProgramData\ConfigMgr\Validate-ContentOnDPs.ps1") { Remove-File -Path "$env:ProgramData\ConfigMgr\Validate-ContentOnDPs.ps1" }		
+	}
+
 	Function Install-Extensions
 	{
 		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
 		If ($Env:SMS_ADMIN_UI_PATH) #ConfigMgr admin console installed
 		{
-			Install-Remove_ApplicationRevisions
-			Install-Retire_CMApplication
 			Install-Redistribute_FailedPKGsOnContentStatus
 			Install-Redistribute_FailedPKGsOnDPConfStatus
+			Install-Remove_ApplicationRevisions
+			Install-Retire_CMApplication
+			Install-Validate_ContentOnDPs
 		}
 		
 	}
@@ -188,10 +205,11 @@ Try {
 		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
 		If ($Env:SMS_ADMIN_UI_PATH) #ConfigMgr admin console installed
 		{
-			UnInstall-Remove_ApplicationRevisions
-			UnInstall-Retire_CMApplication
 			UnInstall-Redistribute_FailedPKGsOnContentStatus
 			UnInstall-Redistribute_FailedPKGsOnDPConfStatus
+			UnInstall-Remove_ApplicationRevisions
+			UnInstall-Retire_CMApplication
+			UnInstall-Validate_ContentOnDPs
 		}
 		
 	}
