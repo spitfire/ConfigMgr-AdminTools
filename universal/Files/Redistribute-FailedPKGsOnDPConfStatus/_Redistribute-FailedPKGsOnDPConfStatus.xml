@@ -1,0 +1,10 @@
+<ActionDescription Class="Executable" DisplayName="Redistribute all failed Pkgs" MnemonicDisplayName="Redistribute all failed Pkgs" Description = "Redistribute all failed Pkgs" RibbonDisplayType="TextAndSmallImage">
+	<ShowOn>
+		<string>ContextMenu</string>
+		<string>DefaultHomeTab</string>
+	</ShowOn>
+	<Executable>
+		<FilePath>"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</FilePath>
+        <Parameters>-file C:\ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1 "##SUB:__Server##" "##SUB:__Namespace##" "##SUB:NAME##"</Parameters>
+	</Executable>
+</ActionDescription>

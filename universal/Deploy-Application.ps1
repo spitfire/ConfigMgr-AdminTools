@@ -139,6 +139,38 @@ Try {
 		If ("$env:ProgramData\ConfigMgr\Retire-CMApplication.ps1") { Remove-File -Path "$env:ProgramData\ConfigMgr\Retire-CMApplication.ps1" }
 	}
 
+	Function Install-Redistribute_FailedPKGsOnContentStatus
+	{
+		#https://www.applepie.se/redistribute-failed-packages-in-configmgr
+		If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\"}
+		Copy-File "$dirFiles\Redistribute-FailedPKGsOnContentStatus\_Redistribute-FailedPKGsOnContentStatus.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\"
+		Copy-File "$dirFiles\Redistribute-FailedPKGsOnContentStatus\Redistribute-FailedPKGsOnContentStatus.ps1" "$env:ProgramData\ConfigMgr\"
+		Unblock-File "$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnContentStatus.ps1"
+	}
+
+	Function UnInstall-Redistribute_FailedPKGsOnContentStatus
+	{
+		#https://www.applepie.se/redistribute-failed-packages-in-configmgr
+		If ("$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\_Redistribute-FailedPKGsOnContentStatus.xml"){Remove-File -Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\14214306-59f0-46cf-b453-a649f2a249e1\_Redistribute-FailedPKGsOnContentStatus.xml"}
+		If ("$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnContentStatus.ps1") { Remove-File -Path "$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnContentStatus.ps1" }		
+	}
+
+	Function Install-Redistribute_FailedPKGsOnDPConfStatus
+	{
+		#https://www.applepie.se/redistribute-failed-packages-in-configmgr
+		If (!(Test-Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\d8718784-99d5-4449-bc28-a26631fafc07\")){New-Folder "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\d8718784-99d5-4449-bc28-a26631fafc07\"}
+		Copy-File "$dirFiles\Redistribute-FailedPKGsOnDPConfStatus\_Redistribute-FailedPKGsOnDPConfStatus.xml" "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\d8718784-99d5-4449-bc28-a26631fafc07\"
+		Copy-File "$dirFiles\Redistribute-FailedPKGsOnDPConfStatus\Redistribute-FailedPKGsOnDPConfStatus.ps1" "$env:ProgramData\ConfigMgr\"
+		Unblock-File "$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1"
+	}
+
+	Function UnInstall-Redistribute_FailedPKGsOnDPConfStatus
+	{
+		#https://www.applepie.se/redistribute-failed-packages-in-configmgr
+		If ("$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\d8718784-99d5-4449-bc28-a26631fafc07\_Redistribute-FailedPKGsOnDPConfStatus.xml"){Remove-File -Path "$ConfigMgrConsolePath\XmlStorage\Extensions\Actions\d8718784-99d5-4449-bc28-a26631fafc07\_Redistribute-FailedPKGsOnDPConfStatus.xml"}
+		If ("$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1") { Remove-File -Path "$env:ProgramData\ConfigMgr\Redistribute-FailedPKGsOnDPConfStatus.ps1" }		
+	}
+
 	Function Install-Extensions
 	{
 		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
@@ -146,6 +178,8 @@ Try {
 		{
 			Install-Remove_ApplicationRevisions
 			Install-Retire_CMApplication
+			Install-Redistribute_FailedPKGsOnContentStatus
+			Install-Redistribute_FailedPKGsOnDPConfStatus
 		}
 		
 	}
@@ -157,6 +191,8 @@ Try {
 			$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
 			UnInstall-Remove_ApplicationRevisions
 			UnInstall-Retire_CMApplication
+			UnInstall-Redistribute_FailedPKGsOnContentStatus
+			UnInstall-Redistribute_FailedPKGsOnDPConfStatus
 		}
 		
 	}
