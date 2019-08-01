@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 	This script performs the installation or uninstallation of an application(s).
 	# LICENSE #
@@ -63,7 +63,7 @@ Try {
 	## Variables: Application
 	[string]$appVendor = 'International Paper'
 	[string]$appName = 'Admin Tools'
-	[string]$appVersion = '1.0.0'
+	[string]$appVersion = '1.0.1'
 	[string]$appArch = ''
 	[string]$appLang = 'en-us'
 	[string]$appRevision = '01'
@@ -108,6 +108,7 @@ Try {
 
 	#endregion
 	##* Do not modify section above
+	$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
 	Function Install-Remove_ApplicationRevisions
 	{
 		#https://sccm-zone.com/sccm-right-click-clean-old-application-revisions-309f7bb9a8db
@@ -143,7 +144,6 @@ Try {
 		If(!(Test-Path -Path "$env:ProgramData\ConfigMgr")){New-Folder "$env:ProgramData\ConfigMgr"}
 		If ($Env:SMS_ADMIN_UI_PATH) #ConfigMgr admin console installed
 		{
-			$ConfigMgrConsolePath = $ENV:SMS_ADMIN_UI_PATH.Replace("bin\i386","")
 			Install-Remove_ApplicationRevisions
 			Install-Retire_CMApplication
 		}
