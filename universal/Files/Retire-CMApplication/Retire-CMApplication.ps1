@@ -10,8 +10,8 @@ param (
 Import-Module ($Env:SMS_ADMIN_UI_PATH.Substring(0,$Env:SMS_ADMIN_UI_PATH.Length-5) + '\ConfigurationManager.psd1')
 
 # change to the cm site drive
-$PSD = Get-PSDrive -PSProvider CMSite
-cd "$($PSD):"
+$PSD = Get-PSDrive -PSProvider CMSite |Select-Object -ExpandProperty Name
+Set-Location "$($PSD):"
 
 # for each provided app name, remove deployments, rename, and retire
 foreach ($RetiringAppName in $RetiringApps) {
