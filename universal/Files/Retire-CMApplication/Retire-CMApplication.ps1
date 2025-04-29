@@ -3,7 +3,7 @@ param (
     [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
     $RetiringApps = @(),
     [Parameter(Mandatory = $false)]
-    $rename = $false
+    $rename = $false,
     $move = $true
 )
 
@@ -85,7 +85,6 @@ foreach ($RetiringAppName in $RetiringApps) {
             # move the app according to category
                 Move-CMObject -FolderPath "Application\Retired" -InputObject $RetiringApp
                 Write-Host "Moved to Retired."
-            }
         }
 
         # retire the app
