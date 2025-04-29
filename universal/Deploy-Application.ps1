@@ -61,7 +61,7 @@ Try {
 	##* VARIABLE DECLARATION
 	##*===============================================
 	## Variables: Application
-	[string]$appVendor = 'International Paper'
+	[string]$appVendor = 'spitfire'
 	[string]$appName = 'Admin Tools'
 	[string]$appVersion = '1.2.0'
 	[string]$appArch = ''
@@ -69,7 +69,7 @@ Try {
 	[string]$appRevision = '01'
 	[string]$baseScriptVersion = '1.2.0'
 	[string]$appScriptVersion = '1.0.0'
-	[string]$appScriptDate = '2019-06-03'
+	[string]$appScriptDate = '2025-04-29'
 	[string]$appScriptAuthor = 'Mieszko Ślusarczyk'
 	[bool]$showPostinstallMessage = $false
 	##*===============================================
