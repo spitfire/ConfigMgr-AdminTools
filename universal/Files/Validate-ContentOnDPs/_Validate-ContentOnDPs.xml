@@ -5,6 +5,6 @@
 	</ShowOn>
 	<Executable>
 		<FilePath>"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</FilePath>
-		<Parameters>-file C:\ProgramData\ConfigMgr\Validate-ContentOnDPs.ps1 "##SUB:__Server##" "##SUB:__Namespace##" "##SUB:PackageID##"</Parameters>
+		<Parameters>-ExecutionPolicy Bypass -file C:\ProgramData\ConfigMgr\Validate-ContentOnDPs.ps1 "##SUB:__Server##" "##SUB:__Namespace##" "##SUB:PackageID##"</Parameters>
 	</Executable>
 </ActionDescription>
