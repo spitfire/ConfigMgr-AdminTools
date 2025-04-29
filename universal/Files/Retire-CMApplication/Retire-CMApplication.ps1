@@ -4,6 +4,7 @@ param (
     $RetiringApps = @(),
     [Parameter(Mandatory = $false)]
     $rename = $false
+    $move = $true
 )
 
 # import cm module
@@ -12,6 +13,13 @@ Import-Module ($Env:SMS_ADMIN_UI_PATH.Substring(0,$Env:SMS_ADMIN_UI_PATH.Length-
 # change to the cm site drive
 $PSD = Get-PSDrive -PSProvider CMSite |Select-Object -ExpandProperty Name
 Set-Location "$($PSD):"
+
+If ($move){
+    If (!(Test-Path "$($PSD):\Application\Retired")){
+        New-CMFolder -ParentFolderPath Application -Name Retired
+    }
+}
+
 
 # for each provided app name, remove deployments, rename, and retire
 foreach ($RetiringAppName in $RetiringApps) {
@@ -71,17 +79,15 @@ foreach ($RetiringAppName in $RetiringApps) {
                 Set-CMApplication -Name $RetiringAppName -NewName "Retired-$RetiringApp"
             } catch { }
             Write-Host "Renamed to Retired-$RetiringAppName."
-
+        }
+        
+        If ($move){
             # move the app according to category
-            if ($RetiringApp.LocalizedCategoryInstanceNames -eq "Mac") {
-                Move-CMObject -FolderPath "Application\Retired" -InputObject $RetiringApp
-                Write-Host "Moved to Retired."
-            } else {
                 Move-CMObject -FolderPath "Application\Retired" -InputObject $RetiringApp
                 Write-Host "Moved to Retired."
             }
         }
-        
+
         # retire the app
         if (!$RetiringApp.IsExpired)
         {
