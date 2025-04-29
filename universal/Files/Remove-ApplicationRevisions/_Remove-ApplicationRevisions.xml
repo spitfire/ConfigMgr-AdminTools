@@ -1,4 +1,4 @@
-<ActionDescription Class="Group" DisplayName="RC Tools" MnemonicDisplayName="RC Tools" Description="Created by Octavian Cordos" SqmDataPoint="53" SelectionMode="Both">
+<ActionDescription Class="Group" DisplayName="RC Tools" MnemonicDisplayName="RC Tools" Description="Created by Mieszko Ślusarczyk" SqmDataPoint="53" SelectionMode="Both">
 	<ShowOn>
 		<string>ContextMenu</string>
 	</ShowOn>
