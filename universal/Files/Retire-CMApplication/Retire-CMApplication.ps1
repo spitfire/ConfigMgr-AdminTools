@@ -24,7 +24,7 @@ If ($move){
 # for each provided app name, remove deployments, rename, and retire
 foreach ($RetiringAppName in $RetiringApps) {
 
-    if ($RetiringApp = Get-CMApplication -Fast -Name $RetiringAppName)
+    if ($RetiringApp = Get-CMApplication -Name $RetiringAppName)
     {
         Write-Host "So long, $RetiringAppName!"
 
